@@ -1,1 +1,24 @@
 
+name: Flux CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install Flux CLI
+        run: curl -s https://fluxcd.io/install.sh | sudo bash
+      - name: Generate Flux Manifests
+        run: ./generate-flux-manifests.sh
+      - name: Commit changes
+        uses: EndBug/add-and-commit@v7
+        with:
+          add: '.'
+          message: "sync generated Flux Manifests"
+          signoff: true
