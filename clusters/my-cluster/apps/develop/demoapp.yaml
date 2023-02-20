@@ -1,0 +1,19 @@
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: demoapp-develop
+  namespace: flux-system
+spec:
+  chart:
+    spec:
+      chart: demoapp
+      interval: 1m0s
+      reconcileStrategy: ChartVersion
+      sourceRef:
+        kind: GitRepository
+        name: helm-charts
+  interval: 1m0s
+  releaseName: demoapp-develop
+  targetNamespace: develop
+
