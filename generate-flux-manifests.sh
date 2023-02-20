@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Prepare folders
+mkdir -p clusters/my-cluster/apps/develop
+
+# Run Flix Manifest gen
 flux create helmrelease demoapp-develop \
     --source GitRepository/helm-charts \
     --chart "demoapp" \
